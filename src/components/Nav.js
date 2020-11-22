@@ -1,27 +1,40 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //MATERIAL UI COMPONENTS
-import { AppBar, Grid, makeStyles, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { AppBar, Grid, Tab, Tabs, Toolbar, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    root: {
-        flexGrow: 1
-    }
-})
 
 const Nav = () => {
-    const classes = useStyles
-    const history = useHistory()
+    const navigate = useNavigate()
+    const pathname = window.location.pathname
     const [value, setValue] = useState(0)
+
+    useEffect(() => {
+        switch (pathname) {
+            case '/products':
+                setValue(1)
+                break;
+
+            case '/contact':
+                setValue(2)
+                break;
+
+            case '/about':
+                setValue(3)
+                break;
+
+            default:
+                break;
+        }
+    }, [])
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
 
     const handleHistory = (url) => {
-        history.push(url)
+        navigate(url)
     }
 
     return (
@@ -40,7 +53,6 @@ const Nav = () => {
                             <Tab onClick={() => handleHistory('/products')} label='Products' />
                             <Tab onClick={() => handleHistory('/contact')} label='Contact Us' />
                             <Tab onClick={() => handleHistory('/about')} label='About Us' />
-                            <Tab onClick={() => handleHistory('/shoppingCart')} label={<ShoppingCartIcon />}/>
                         </Tabs>
                     </Grid>
                 </Grid>

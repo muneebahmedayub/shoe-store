@@ -1,9 +1,12 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const Products = () => {
     return (
         <div>
-            Product
+            <h2>Products</h2>
+
+            <Outlet />
         </div>
     )
 }
